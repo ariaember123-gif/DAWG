@@ -1,0 +1,428 @@
+/* ===========================
+   $DAWG — PFP Generator CSS
+   =========================== */
+
+.pfp-body {
+  background: var(--darker);
+}
+
+/* ===== PFP HERO ===== */
+.pfp-hero {
+  padding: 130px 40px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pfp-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(255,215,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pfp-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 96px);
+  letter-spacing: 4px;
+  line-height: 1;
+  margin-bottom: 16px;
+  text-shadow: 3px 3px 0 rgba(255,107,26,0.4);
+}
+
+.pfp-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.pfp-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  align-items: start;
+}
+
+/* ===== CONTROLS ===== */
+.pfp-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.control-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+.control-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--yellow);
+  margin-bottom: 14px;
+}
+
+/* CHIPS */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: rgba(255,215,0,0.5);
+  color: var(--text);
+  background: rgba(255,215,0,0.06);
+}
+
+.chip.active {
+  background: var(--yellow);
+  color: var(--dark);
+  border-color: var(--yellow);
+  font-weight: 900;
+}
+
+/* TEXTAREA */
+.custom-prompt {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 14px 16px;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.custom-prompt:focus {
+  border-color: rgba(255,215,0,0.5);
+}
+
+.custom-prompt::placeholder {
+  color: #444;
+}
+
+/* GENERATE BUTTON */
+.generate-btn {
+  width: 100%;
+  background: var(--yellow);
+  color: var(--dark);
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 2px;
+  padding: 18px 32px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.generate-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 16px 50px rgba(255,215,0,0.4);
+}
+
+.generate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.generate-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.generate-note {
+  text-align: center;
+  font-size: 13px;
+  color: #444;
+}
+
+/* ===== OUTPUT ===== */
+.pfp-output {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.output-preview {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.output-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+}
+
+.placeholder-dawg {
+  font-size: 80px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.output-placeholder p:first-of-type { font-weight: 700; font-size: 16px; color: var(--text); }
+.placeholder-sub { font-size: 13px; }
+
+#generatedImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* LOADING */
+.output-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 24px;
+  position: absolute;
+  inset: 0;
+  background: rgba(13,13,13,0.95);
+}
+
+.loading-spinner {
+  width: 56px;
+  height: 56px;
+  border: 4px solid rgba(255,215,0,0.2);
+  border-top-color: var(--yellow);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.output-loading p {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--yellow);
+  letter-spacing: 1px;
+}
+
+.loading-sub {
+  font-size: 14px !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-body) !important;
+  letter-spacing: 0 !important;
+}
+
+/* ERROR */
+.output-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+}
+
+.error-detail { font-size: 12px; color: #f44; }
+
+/* TRAITS SUMMARY */
+.traits-summary {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+.traits-summary h4 {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.traits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trait-tag {
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.3);
+  color: var(--yellow);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+.trait-empty {
+  color: #444;
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* ACTION BUTTONS */
+.output-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.output-actions .btn-primary { flex: 1; text-align: center; justify-content: center; }
+.output-actions .btn-secondary { flex: 1; text-align: center; justify-content: center; }
+
+.btn-ghost {
+  flex: 1;
+  text-align: center;
+  background: rgba(29,155,240,0.1);
+  color: #1d9bf0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(29,155,240,0.3);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-ghost:hover { background: rgba(29,155,240,0.2); }
+
+/* PROMPT DISPLAY */
+.prompt-display {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+
+.prompt-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.prompt-text {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ===== EXAMPLES SECTION ===== */
+.pfp-examples-section {
+  background: var(--card-bg);
+  padding: 80px 0;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.example-card {
+  background: var(--darker);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.example-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255,215,0,0.4);
+}
+
+.example-img {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.example-card p {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .pfp-container {
+    grid-template-columns: 1fr;
+    padding: 0 20px 60px;
+  }
+
+  .pfp-output {
+    position: static;
+    order: -1;
+  }
+
+  .output-preview {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .pfp-hero { padding: 110px 20px 40px; }
+  .output-actions { flex-direction: column; }
+  .btn-ghost { flex: none; }
+}
